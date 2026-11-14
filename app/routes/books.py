@@ -11,3 +11,14 @@ class Livre:
             self.quantite_disponible += 1
             return True
         return False
+
+    def retirer_exemplaire(self):
+        if self.quantite_disponible > 0:
+            self.quantite_disponible -= 1
+            return True
+        return False
+
+    def est_disponible(self):
+        return self.quantite_disponible > 0
+    def afficher_stock(self):
+        return self.quantite_disponible
