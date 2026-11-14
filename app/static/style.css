@@ -75,3 +75,142 @@ section {
     border-radius: 5px;
     margin-bottom: 20px;
 }
+
+/* ---------- Général ---------- */
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #f4f5fa;
+    color: #2c3e50;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 12px 24px;
+    background: #2c3e50;
+}
+
+nav a { color: white; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+.nav-user { margin-left: auto; color: #bdc3c7; }
+
+.flash {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 10px 16px;
+    background: #e8f4fd;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+}
+.flash p { margin: 4px 0; }
+
+a.btn-primary { text-decoration: none; display: inline-block; padding: 10px 20px; }
+
+.btn-danger {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background: #c0392b;
+    color: white;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #c0392b;
+    cursor: pointer;
+    font-size: 0.85em;
+    text-decoration: underline;
+}
+
+.demo-info { color: #555; }
+
+/* ---------- Dashboard ---------- */
+.dashboard-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    display: block;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card summary { cursor: pointer; font-weight: bold; }
+
+.book-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.book-form label, .inline-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9em;
+}
+
+.book-form input, .inline-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.book-card {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s;
+}
+.book-card:hover { transform: translateY(-3px); }
+.book-card h3 { margin: 0 0 4px; }
+
+.author { color: #7f8c8d; font-style: italic; margin-top: 0; }
+
+.progress {
+    height: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+.progress-bar { height: 100%; background: #27ae60; }
+
+.status.done { color: #27ae60; font-weight: bold; }
+.status.late, .late { color: #c0392b; }
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    text-align: center;
+}
+.stat-value { display: block; font-size: 1.5em; font-weight: bold; }
+.stat-label { font-size: 0.85em; color: #7f8c8d; }
+
+.history { padding-left: 20px; }
+.history li { margin: 6px 0; }
+.history form { display: inline; }

@@ -1,28 +1,43 @@
 {% extends "base.html" %}
 
-
-
-<!DOCTYPE html>
-<html>
-    <!-- bookshelf/dashboard -->
-<head>
-    <title></title>
-</head>
-<body>
 {% block content %}
-    {% extends "base.html" %}
-
-{% block content %}
+<!-- bookshelf/dashboard -->
 <div class="dashboard-container">
     <div class="dashboard-header">
-        <!-- Affiche le pseudo de la personne connectée -->
         <h1>La bibliothèque de {{ user.username }}</h1>
         <p>Tu as actuellement {{ livres | length }} livre(s) dans ta collection.</p>
-        
-        <!-- Le reste de ton bouton "+ Ajouter un livre" et de ta grille -->
     </div>
+
+    <details class="card add-book" {% if not livres %}open{% endif %}>
+        <summary>+ Ajouter un livre</summary>
+        <form method="POST" action="{{ url_for('main.ajouter_livre') }}" class="book-form">
+            <label>Titre <input type="text" name="titre" required></label>
+            <label>Auteur <input type="text" name="auteur" required></label>
+            <label>Pages totales <input type="number" name="pages_totales" min="1" required></label>
+            <label>Date limite <input type="date" name="date_limite" min="{{ aujourdhui }}" required></label>
+            <label>Page actuelle (optionnel) <input type="number" name="pages_initiales" min="0" placeholder="0"></label>
+            <button type="submit" class="btn-secondary">Ajouter</button>
+        </form>
+    </details>
+
+    {% if livres %}
+    <div class="book-grid">
+        {% for livre in livres %}
+        <a class="card book-card" href="{{ url_for('main.detail_livre', livre_id=livre.id) }}">
+            <h3>{{ livre.titre }}</h3>
+            <p class="author">{{ livre.auteur }}</p>
+            <div class="progress"><div class="progress-bar" style="width: {{ livre.pourcentage }}%"></div></div>
+            <p>{{ livre.pages_lues }} / {{ livre.pages_totales }} pages ({{ livre.pourcentage }}%)</p>
+            {% if livre.est_termine %}
+                <p class="status done">Terminé 🎉</p>
+            {% elif livre.en_retard %}
+                <p class="status late">Date limite dépassée — {{ livre.pages_restantes }} pages restantes</p>
+            {% else %}
+                <p class="status"><strong>{{ livre.pages_par_jour }}</strong> pages/jour jusqu'au {{ livre.date_limite }}</p>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
-
-</body>
-</html>

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- détail d'un livre -->
+<div class="dashboard-container">
+    <p><a href="{{ url_for('main.library') }}">← Retour à ma bibliothèque</a></p>
+
+    <div class="dashboard-header">
+        <h1>{{ livre.titre }}</h1>
+        <p class="author">{{ livre.auteur }}</p>
+    </div>
+
+    <div class="card">
+        <div class="progress"><div class="progress-bar" style="width: {{ livre.pourcentage }}%"></div></div>
+        <div class="stats">
+            <div><span class="stat-value">{{ livre.pourcentage }}%</span><span class="stat-label">lu</span></div>
+            <div><span class="stat-value">{{ livre.pages_lues }}</span><span class="stat-label">pages lues</span></div>
+            <div><span class="stat-value">{{ livre.pages_restantes }}</span><span class="stat-label">pages restantes</span></div>
+            <div><span class="stat-value">{{ livre.pages_totales }}</span><span class="stat-label">pages totales</span></div>
+            <div><span class="stat-value">{{ livre.date_limite }}</span><span class="stat-label">date limite</span></div>
+            <div>
+                {% if livre.est_termine %}
+                    <span class="stat-value">🎉</span><span class="stat-label">terminé</span>
+                {% elif livre.en_retard %}
+                    <span class="stat-value late">{{ livre.pages_restantes }}</span><span class="stat-label">pages en retard</span>
+                {% else %}
+                    <span class="stat-value">{{ livre.pages_par_jour }}</span>
+                    <span class="stat-label">pages/jour ({{ livre.jours_restants }} jour(s) restant(s))</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Ajouter des pages lues</h2>
+        <form method="POST" action="{{ url_for('main.ajouter_lecture', livre_id=livre.id) }}" class="inline-form">
+            <label>Pages lues <input type="number" name="pages" min="1" required></label>
+            <label>Le <input type="date" name="date" value="{{ aujourdhui }}" max="{{ aujourdhui }}" required></label>
+            <button type="submit" class="btn-secondary">Ajouter</button>
+        </form>
+
+        <h3>Historique</h3>
+        {% if livre.pages_initiales %}
+            <p>Page de départ : {{ livre.pages_initiales }}</p>
+        {% endif %}
+        {% if livre.lectures %}
+        <ul class="history">
+            {% for lecture in livre.lectures %}
+            <li>
+                {{ lecture.date }} — {{ lecture.pages }} page(s)
+                <form method="POST" action="{{ url_for('main.supprimer_lecture', livre_id=livre.id, index=loop.index0) }}">
+                    <button type="submit" class="btn-link">supprimer</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>Aucune séance de lecture pour l'instant.</p>
+        {% endif %}
+    </div>
+
+    <details class="card">
+        <summary>Modifier le livre</summary>
+        <form method="POST" action="{{ url_for('main.modifier_livre', livre_id=livre.id) }}" class="book-form">
+            <label>Titre <input type="text" name="titre" value="{{ livre.titre }}" required></label>
+            <label>Auteur <input type="text" name="auteur" value="{{ livre.auteur }}" required></label>
+            <label>Pages totales <input type="number" name="pages_totales" min="1" value="{{ livre.pages_totales }}" required></label>
+            <label>Date limite <input type="date" name="date_limite" value="{{ livre.date_limite }}" required></label>
+            <label>Page de départ <input type="number" name="pages_initiales" min="0" value="{{ livre.pages_initiales }}"></label>
+            <button type="submit" class="btn-primary">Enregistrer</button>
+        </form>
+    </details>
+
+    <form method="POST" action="{{ url_for('main.supprimer_livre', livre_id=livre.id) }}"
+          onsubmit='return confirm({{ ("Supprimer « " ~ livre.titre ~ " » ?") | tojson }});'>
+        <button type="submit" class="btn-danger">Supprimer ce livre</button>
+    </form>
+</div>
+{% endblock %}

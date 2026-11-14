@@ -2,24 +2,12 @@
 
 {% block content %}
 <div class="auth-container">
-    <!-- Zone pour afficher les messages d'erreur ou de succès de Flask -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
     <div class="auth-box">
-        <!-- Formulaire de Connexion -->
         <div class="form-section">
             <h2>Se connecter</h2>
             <form method="POST" action="{{ url_for('main.login') }}">
                 <label for="login-username">Nom d'utilisateur</label>
-                <input type="text" id="login-username" name="username" placeholder="Ton pseudo" required>
+                <input type="text" id="login-username" name="username" placeholder="Ton pseudo" required autofocus>
 
                 <label for="login-password">Mot de passe</label>
                 <input type="password" id="login-password" name="password" placeholder="••••••••" required>
@@ -28,20 +16,10 @@
             </form>
         </div>
 
-        <hr class="divider">
-
-        <!-- Formulaire d'Inscription -->
-        <div class="form-section">
-            <h2>Créer un compte</h2>
-            <form method="POST" action="{{ url_for('main.register') }}">
-                <label for="reg-username">Choisis un pseudo</label>
-                <input type="text" id="reg-username" name="username" placeholder="Nouveau pseudo" required>
-
-                <label for="reg-password">Choisis un mot de passe</label>
-                <input type="password" id="reg-password" name="password" placeholder="••••••••" required>
-
-                <button type="submit" class="btn-secondary">S'inscrire</button>
-            </form>
+        <div class="form-section demo-info">
+            <h2>Comptes de démo</h2>
+            <p><strong>marie</strong> / marie123</p>
+            <p><strong>lucas</strong> / lucas123</p>
         </div>
     </div>
 </div>

@@ -1,52 +1,34 @@
 import json
-from Utilisateur import Utilisateur
-import bcrypt
+from pathlib import Path
+
+from app.routes.utilisateurs import Utilisateur
+
+# Base de données fixe (2 utilisateurs de démo) : app/data/utilisateurs.json
+CHEMIN_FICHIER = Path(__file__).resolve().parent.parent / "data" / "utilisateurs.json"
+
 
 class GestionnaireUtilisateurs:
-    def __init__(self):
+    def __init__(self, chemin_fichier=CHEMIN_FICHIER):
+        self.chemin_fichier = Path(chemin_fichier)
         self.utilisateurs = []
-        self.chemin_fichier = "utilisateur.json"
         self.chargement()
 
-    def chargement(self):#Permet de charger les informations de l'utilisateur lorsqu'il se connecte
-        with open(self.chemin_fichier, "r") as file:
-            self.fichier = json.load(file)
-            for user in self.fichier:#Cette boucle fait en sorte que la liste self.utilisateurs apprend les objets utilisateurs avec les attributs deja sauvegarder
-                self.utilisateurs.append(Utilisateur(user["username"] ,user["password"] ,user["livres"]))
+    def chargement(self):
+        """Charge les utilisateurs (et leurs livres) depuis le fichier JSON."""
+        with open(self.chemin_fichier, "r", encoding="utf-8") as file:
+            donnees = json.load(file)
+        self.utilisateurs = [Utilisateur.from_dict(u) for u in donnees]
 
-    def sauvegarde(self):#Permet de sauvegarder les attributes a la fin d'une session
-        donne_json = []
-        with open(self.chemin_fichier, "w") as file:
-            for i in self.utilisateurs:#Cette boucle apprend les differnent attribut des utilisateurs et met chaque utilisateur dans la liste
-                data = {
-                    "username": i.username,
-                    "password": i.password,
-                    "livres_empruntes": i.livres_empruntes
-            }
-                donne_json.append(data)
-            json.dump(donne_json, file, indent=4)
+    def sauvegarde(self):
+        """Écrit l'état actuel (livres, lectures) dans le fichier JSON."""
+        with open(self.chemin_fichier, "w", encoding="utf-8") as file:
+            json.dump([u.to_dict() for u in self.utilisateurs], file, indent=4, ensure_ascii=False)
 
-    def ajouter_utilisateur(self,user,pwd):
-        existe = any(u.username == user for u in self.utilisateurs)
-        if not existe:
-            pwd = pwd.encode("utf-8")
-            salt = bcrypt.gensalt()
-            pwd_hashed = bcrypt.hashpw(pwd, salt)
-            pwd_hashed = pwd_hashed.decode("utf-8")
-            self.utilisateurs.append(Utilisateur(user,pwd_hashed))
-            return True
-        else:
-            return False
+    def trouver(self, username):
+        return next((u for u in self.utilisateurs if u.username == username), None)
 
-    def connexion(self,username,password):
-         resultat = [
-            user for user in self.utilisateurs
-            if username == user.username
-        ]
-         if resultat:
-             if resultat[0].verifier_mdp(password):
-                 return resultat[0]
-             else:
-                 return None
-         else:
-             return None
+    def connexion(self, username, password):
+        user = self.trouver(username)
+        if user and user.verifier_mdp(password):
+            return user
+        return None

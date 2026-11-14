@@ -2,25 +2,34 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Ma Bibliothèque</title>
 </head>
 <body>
-   <nav>
+<nav>
     <a href="{{ url_for('main.home') }}">Accueil</a>
-    <a href="{{ url_for('main.library') }}">Ma Bibliothèque</a>
-    
     {% if session.get('logged_in') %}
+        <a href="{{ url_for('main.library') }}">Ma Bibliothèque</a>
+        <span class="nav-user">Connecté : {{ session.get('username') }}</span>
         <a href="{{ url_for('main.logout') }}">Déconnexion</a>
     {% else %}
         <a href="{{ url_for('main.login') }}">Connexion</a>
     {% endif %}
 </nav>
 
+<main>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    {% block content %}{% endblock %}
+</main>
 </body>
 </html>
-

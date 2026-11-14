@@ -1,3 +1,25 @@
-{
-
-}
+[
+    {
+        "username": "marie",
+        "password": "$2b$12$yBOMdp/0GkckteT5/FPeGOdEZiPCEeU3IHj7hPSV8hryhnY5Wu/V2",
+        "livres": [
+            {
+                "id": "a1b2c3d4",
+                "titre": "Le Petit Prince",
+                "auteur": "Antoine de Saint-Exupéry",
+                "pages_totales": 96,
+                "date_limite": "2026-12-01",
+                "pages_initiales": 10,
+                "lectures": [
+                    {"date": "2026-11-10", "pages": 12},
+                    {"date": "2026-11-12", "pages": 8}
+                ]
+            }
+        ]
+    },
+    {
+        "username": "lucas",
+        "password": "$2b$12$Cn9AmU2tQR4GPnatn89g3.LO.ngsjcYJVTrVKeOZfVyGYGsCcQ.Sy",
+        "livres": []
+    }
+]
