@@ -29,7 +29,7 @@
             <div class="progress"><div class="progress-bar" style="width: {{ livre.pourcentage }}%"></div></div>
             <p>{{ livre.pages_lues }} / {{ livre.pages_totales }} pages ({{ livre.pourcentage }}%)</p>
             {% if livre.est_termine %}
-                <p class="status done">Terminé 🎉</p>
+                <p class="status done">Terminé </p>
             {% elif livre.en_retard %}
                 <p class="status late">Date limite dépassée — {{ livre.pages_restantes }} pages restantes</p>
             {% else %}

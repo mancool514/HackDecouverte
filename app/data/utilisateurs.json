@@ -11,9 +11,33 @@
                 "date_limite": "2026-12-01",
                 "pages_initiales": 10,
                 "lectures": [
-                    {"date": "2026-11-10", "pages": 12},
-                    {"date": "2026-11-12", "pages": 8}
+                    {
+                        "date": "2026-11-10",
+                        "pages": 12
+                    },
+                    {
+                        "date": "2026-11-12",
+                        "pages": 8
+                    }
                 ]
+            },
+            {
+                "id": "93404127",
+                "titre": "antigone",
+                "auteur": "anouilh",
+                "pages_totales": 158,
+                "date_limite": "2026-11-17",
+                "pages_initiales": 50,
+                "lectures": []
+            },
+            {
+                "id": "e1904ae5",
+                "titre": "the Man in the High Castle",
+                "auteur": "philip dick",
+                "pages_totales": 250,
+                "date_limite": "2026-11-20",
+                "pages_initiales": 90,
+                "lectures": []
             }
         ]
     },
