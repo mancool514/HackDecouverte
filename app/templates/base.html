@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <!-- navbar and layout wraper -->
+<html lang="fr">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Ma Bibliothèque</title>
 </head>
-<body></body>
+<body>
+   <nav>
+        <a href="{{ url_for('main.home') }}">Accueil</a>
+        <a href="{{ url_for('main.library') }}">Ma Bibliothèque</a>
+        <a href="{{ url_for('main.login') }}">Connexion</a>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
 </html>
+
