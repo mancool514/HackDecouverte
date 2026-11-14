@@ -1,5 +1,6 @@
 import bcrypt
 
+
 class Utilisateur:
     def __init__(self,username,password):
         self.username = username
@@ -7,15 +8,15 @@ class Utilisateur:
         self.livres= []
 
     def ajouter_livre(self,livre):
-        if livre not in self.livres_empruntes:
-            self.livres_empruntes.append(livre)
+        if livre not in self.livres:
+            self.livres.append(livre)
             return True
         else:
             return False
 
     def retirer_livre(self,livre):
-        if livre in self.livres_empruntes:
-            self.livres_empruntes.remove(livre)
+        if livre in self.livres:
+            self.livres.remove(livre)
             return True
         else:
             return False
