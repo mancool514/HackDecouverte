@@ -4,7 +4,7 @@ class Utilisateur:
     def __init__(self,username,password):
         self.username = username
         self.password = password
-        self.livres_empruntes = livres_empruntes if livres_empruntes is not None else []
+        self.livres= []
 
     def ajouter_livre(self,livre):
         if livre not in self.livres_empruntes:
