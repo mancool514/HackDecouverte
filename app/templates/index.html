@@ -10,8 +10,18 @@
 </head>
 <body>
 {% block content %}
-    <h1>Bienvenue sur ma bibliothèque !</h1>
-    <p>Si tu vois ce texte avec la navbar, ça fonctionne.</p>
+    {% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <!-- Affiche le pseudo de la personne connectée -->
+        <h1>La bibliothèque de {{ user.username }}</h1>
+        <p>Tu as actuellement {{ livres | length }} livre(s) dans ta collection.</p>
+        
+        <!-- Le reste de ton bouton "+ Ajouter un livre" et de ta grille -->
+    </div>
+</div>
 {% endblock %}
 
 </body>
