@@ -8,16 +8,16 @@ class GestionnaireUtilisateurs:
         self.chemin_fichier = "utilisateur.json"
         self.chargement()
 
-    def chargement(self):
+    def chargement(self):#Permet de charger les informations de l'utilisateur lorsqu'il se connecte
         with open(self.chemin_fichier, "r") as file:
             self.fichier = json.load(file)
-            for user in self.fichier:
+            for user in self.fichier:#Cette boucle fait en sorte que la liste self.utilisateurs apprend les objets utilisateurs avec les attributs deja sauvegarder
                 self.utilisateurs.append(Utilisateur(user["username"] ,user["password"] ,user["livres"]))
 
-    def sauvegarde(self):
+    def sauvegarde(self):#Permet de sauvegarder les attributes a la fin d'une session
         donne_json = []
         with open(self.chemin_fichier, "w") as file:
-            for i in self.utilisateurs:
+            for i in self.utilisateurs:#Cette boucle apprend les differnent attribut des utilisateurs et met chaque utilisateur dans la liste
                 data = {
                     "username": i.username,
                     "password": i.password,
