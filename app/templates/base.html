@@ -2,14 +2,21 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Ma Bibliothèque</title>
 </head>
 <body>
    <nav>
-        <a href="{{ url_for('main.home') }}">Accueil</a>
-        <a href="{{ url_for('main.library') }}">Ma Bibliothèque</a>
+    <a href="{{ url_for('main.home') }}">Accueil</a>
+    <a href="{{ url_for('main.library') }}">Ma Bibliothèque</a>
+    
+    {% if session.get('logged_in') %}
+        <a href="{{ url_for('main.logout') }}">Déconnexion</a>
+    {% else %}
         <a href="{{ url_for('main.login') }}">Connexion</a>
-    </nav>
+    {% endif %}
+</nav>
+
 
     <main>
         {% block content %}{% endblock %}
