@@ -5,14 +5,14 @@ import bcrypt
 class GestionnaireUtilisateurs:
     def __init__(self):
         self.utilisateurs = []
-        self.chemin_fichier = "db/utilisateur.json"
+        self.chemin_fichier = "utilisateur.json"
         self.chargement()
 
     def chargement(self):
         with open(self.chemin_fichier, "r") as file:
             self.fichier = json.load(file)
             for user in self.fichier:
-                self.utilisateurs.append(Utilisateur(user["username"] ,user["password"] ,user["livres_empruntes"]))
+                self.utilisateurs.append(Utilisateur(user["username"] ,user["password"] ,user["livres"]))
 
     def sauvegarde(self):
         donne_json = []
