@@ -1,7 +1,7 @@
 import bcrypt
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from app.routes.utilisateurs import Utilisateur
-from app.routes.books import Livre
+from app.routes.livre import Livre
 
 main_bp = Blueprint("main", __name__)
 
