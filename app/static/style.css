@@ -67,7 +67,7 @@ section {
 }
 
 .btn-secondary {
-    background-color: #27ae60;
+    background-color: #ae2e27;
     color: white;
 }
 
@@ -92,8 +92,8 @@ nav {
     gap: 20px;
     align-items: center;
     padding: 12px 24px;
-    background: #151515;
-    border-bottom: white;
+    background: #d22121;
+    border-bottom: 2px solid white;
 }
 
 nav a { color: white; text-decoration: none; }
@@ -201,7 +201,7 @@ a.btn-primary { text-decoration: none; display: inline-block; padding: 10px 20px
     overflow: hidden;
     margin: 10px 0;
 }
-.progress-bar { height: 100%; background: #27ae60; }
+.progress-bar { height: 100%; background: #de3838; }
 
 .status.done { color: #27ae60; font-weight: bold; }
 .status.late, .late { color: #c0392b; }
